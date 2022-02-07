@@ -3,11 +3,13 @@
 
 import sbt._
 import Keys._
+import wartremover.WartRemover.autoImport.{Warts, wartremoverErrors}
 import xerial.sbt.Sonatype.SonatypeKeys._
 
 object ScalaProject {
   val hiddenProjectSettings = Seq(
     publish / skip := true,
+    Compile / compile / wartremoverErrors ++= Warts.all
   )
 
   def publicProjectSettings = Seq(
